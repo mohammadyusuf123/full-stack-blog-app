@@ -2,23 +2,24 @@ import Image from 'next/image';
 import styles from './SinglePost.module.css';
 import { Suspense } from 'react';
 import PostUser from '@/components/PostUser/PostUser';
+import { getPost } from '@/lib/data';
 
 
 // FETCH DATA WITH AN API
-const getData = async (slug) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+// const getData = async (slug) => {
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
 
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
+//   if (!res.ok) {
+//     throw new Error("Something went wrong");
+//   }
 
-  return res.json();
-};
+//   return res.json();
+// };
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
 
-  const post = await getData(Number(slug));
+  const post = await getPost(slug)
 
   return {
     title: post.title,
@@ -30,14 +31,13 @@ export const generateMetadata = async ({ params }) => {
 const DynamicBlog = async({params}) => {
 
   const { slug } = params;
-
-  // FETCH DATA WITH AN API
-  const post = await getData(slug);
-
-  console.log(post)
+     
+  
 
   // FETCH DATA WITHOUT AN API
-  // const post = await getPost(slug);
+  const post = await getPost(slug);
+  console.log(post)
+  
 
 
     return (
@@ -55,13 +55,15 @@ const DynamicBlog = async({params}) => {
               </Suspense>
             )}
             <div className={styles.detailText}>
-              <span className={styles.detailTitle}>Reactions</span>
+              <span className={styles.detailTitle}>Date</span>
               <span className={styles.detailValue}>
-               01.20.2014
+              <span className={styles.detailValue}>
+              {post.createdAt.toString().slice(4, 16)}
+            </span>
               </span>
             </div>
           </div>
-          <div className={styles.content}>{post.body}</div>
+          <div className={styles.content}>{post.desc}</div>
         </div>
       </div>
     );

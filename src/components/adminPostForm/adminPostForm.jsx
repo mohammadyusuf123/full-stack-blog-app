@@ -1,13 +1,11 @@
-import React from 'react';
 "use client"
 
-import { addPost } from "@/lib/action";
+import { addPost } from "@/lib/actions";
 import styles from "./adminPostForm.module.css";
 import { useFormState } from "react-dom";
 
-const adminPostForm = ({userId}) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [state, formAction] = useFormState(addPost, undefined);
+const AdminPostForm = ({userId}) => {
+  const [state, formAction] = useFormState(addPost, undefined);
     return (
         <form action={formAction} className={styles.container}>
         <h1>Add New Post</h1>
@@ -22,4 +20,4 @@ const adminPostForm = ({userId}) => {
     );
 };
 
-export default adminPostForm;
+export default AdminPostForm;

@@ -3,7 +3,7 @@ import styles from './adminUser.module.css';
 import Image from 'next/image';
 import { deleteUser } from '@/lib/actions';
 
-const adminUser = async() => {
+const AdminUser = async() => {
     const users = await getUsers();
     return (
         <div className={styles.container}>
@@ -29,4 +29,4 @@ const adminUser = async() => {
     );
 };
 
-export default adminUser;
+export default AdminUser;

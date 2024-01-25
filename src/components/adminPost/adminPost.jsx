@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './adminPost.module.css';
 import { deletePost } from '@/lib/actions';
 
-const adminPost =async() => {
+const AdminPost =async() => {
     const posts = await getPosts();
     return (
         <div className={styles.container}>
@@ -29,4 +29,4 @@ const adminPost =async() => {
     );
 };
 
-export default adminPost;
+export default AdminPost;

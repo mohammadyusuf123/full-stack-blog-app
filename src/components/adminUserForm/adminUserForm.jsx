@@ -1,11 +1,10 @@
-
 "use client";
-import { addUser } from "@/lib/action";
+
+import { addUser } from "@/lib/actions";
 import styles from "./adminUserForm.module.css";
 import { useFormState } from "react-dom";
-const adminUserForm = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [state, formAction] = useFormState(addUser, undefined);
+const AdminUserForm = () => {
+  const [state, formAction] = useFormState(addUser, undefined);
     return (
         <form action={formAction} className={styles.container}>
         <h1>Add New User</h1>
@@ -24,4 +23,4 @@ const adminUserForm = () => {
     );
 };
 
-export default adminUserForm;
+export default AdminUserForm;
