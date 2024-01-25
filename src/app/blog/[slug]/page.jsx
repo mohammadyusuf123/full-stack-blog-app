@@ -34,6 +34,8 @@ const DynamicBlog = async({params}) => {
   // FETCH DATA WITH AN API
   const post = await getData(slug);
 
+  console.log(post)
+
   // FETCH DATA WITHOUT AN API
   // const post = await getPost(slug);
 
@@ -59,7 +61,7 @@ const DynamicBlog = async({params}) => {
               </span>
             </div>
           </div>
-          <div className={styles.content}>{post.desc}</div>
+          <div className={styles.content}>{post.body}</div>
         </div>
       </div>
     );
