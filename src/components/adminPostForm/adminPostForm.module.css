@@ -23,3 +23,11 @@
     color: var(--textColor);
     font-weight: bold;
   }
+  .btn{
+    margin-top: 20px;
+    padding: 10px 20px;
+    outline: none;
+    border-radius: 10px;
+    background-color: steelblue;
+    
+  }

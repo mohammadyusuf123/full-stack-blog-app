@@ -3,11 +3,13 @@ import styles from './PostCard.module.css'
 import Link from 'next/link';
 
 const PostCard = ({post}) => {
+  console.log(post)
     return (
         <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.imgContainer}>
-            <Image src={'/img1.jpg'} alt="" fill className={styles.img}/>
+            <Image src={post.
+imgUrl} alt="" fill className={styles.img}/>
           </div>
           <span className={styles.date}>{post.createdAt?.toString().slice(4, 16)}</span>
         </div>

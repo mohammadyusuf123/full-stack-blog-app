@@ -36,14 +36,13 @@ const DynamicBlog = async({params}) => {
 
   // FETCH DATA WITHOUT AN API
   const post = await getPost(slug);
-  console.log(post)
-  
-
+ 
 
     return (
         <div className={styles.container}>
           <div className={styles.imgContainer}>
-            <Image src={'/img1.jpg'} alt="" fill className={styles.img} />
+            <Image src={post.
+imgUrl} alt="" fill className={styles.img} />
           </div>
        
         <div className={styles.textContainer}>

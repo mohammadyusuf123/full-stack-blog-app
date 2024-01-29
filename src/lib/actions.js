@@ -6,25 +6,34 @@ import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcrypt";
+import { UploadImage } from "./upoladImg";
 
+ 
 export const addPost = async (prevState,formData) => {
-  // const title = formData.get("title");
-  // const desc = formData.get("desc");
-  // const slug = formData.get("slug");
+  // const title = formData.get("title")
+  // const desc = formData.get("desc")
+  // const slug = formData.get("slug")
+  // const userId = formData.get("userId")
+  // const img= formData.get("img");
+ 
+  let { title, desc, slug, userId ,img} = Object.fromEntries(formData);
+ const uploadImg= await UploadImage(img,"blgImage")
 
-  const { title, desc, slug, userId } = Object.fromEntries(formData);
+ let { secure_url}=uploadImg
+
+ 
     
   try {
     connectToDb();
-    const newPost = new Post({
+    const singlePost={
       title,
       desc,
       slug,
       userId,
-    });
-
+     imgUrl:secure_url
+    }
+    const newPost = new Post(singlePost);
     await newPost.save();
-    console.log("saved to db");
     revalidatePath("/blog");
     revalidatePath("/admin");
   } catch (err) {
