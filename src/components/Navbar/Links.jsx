@@ -14,7 +14,7 @@ const Links = ({session}) => {
 
     const links=[
         {
-        title:'HomePage',
+        title:'Home',
         path:'/'
     },
         {

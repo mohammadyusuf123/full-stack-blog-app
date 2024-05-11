@@ -14,20 +14,18 @@
     color: var(--textColor);
   }
   
-  .container button {
+   .btn {
     padding: 20px;
     cursor: pointer;
-    background-color: var(--btn);
     border: none;
     border-radius: 5px;
-    color: var(--textColor);
     font-weight: bold;
   }
-  .btn{
+  /* .btn{
     margin-top: 20px;
     padding: 10px 20px;
     outline: none;
     border-radius: 10px;
     background-color: steelblue;
     
-  }
+  } */

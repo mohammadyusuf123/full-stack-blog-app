@@ -2,7 +2,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { Post, User } from "./models";
+import { Contact, Post, User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcrypt";
@@ -10,13 +10,15 @@ import { UploadImage } from "./upoladImg";
 
  
 export const addPost = async (prevState,formData) => {
+  console.log(formData)
   // const title = formData.get("title")
   // const desc = formData.get("desc")
   // const slug = formData.get("slug")
   // const userId = formData.get("userId")
   // const img= formData.get("img");
  
-  let { title, desc, slug, userId ,img} = Object.fromEntries(formData);
+  let { title, userId,slug,desc,img } = Object.fromEntries(formData);
+  console.log(img)
  const uploadImg= await UploadImage(img,"blgImage")
 
  let { secure_url}=uploadImg
@@ -25,14 +27,14 @@ export const addPost = async (prevState,formData) => {
     
   try {
     connectToDb();
-    const singlePost={
+   
+    const newPost = new Post({
       title,
+      userId,
       desc,
       slug,
-      userId,
      imgUrl:secure_url
-    }
-    const newPost = new Post(singlePost);
+    });
     await newPost.save();
     revalidatePath("/blog");
     revalidatePath("/admin");
@@ -40,6 +42,7 @@ export const addPost = async (prevState,formData) => {
     console.log(err);
     return { error: "Something went wrong!" };
   }
+  
 };
 
 export const deletePost = async (formData) => {
@@ -156,4 +159,32 @@ export const login = async (prevState, formData) => {
     }
     throw err;
   }
+};
+export const contactForm = async (prevState, formData) => {
+  const { email } = Object.fromEntries(formData);
+  if(!email){
+    return{
+      email,
+      errors:{
+        text: "Must have Email"
+      },
+    }
+  }
+ 
+ 
+      connectToDb();
+    const newContact = new Contact({
+      email,
+    });
+    await newContact.save();
+    revalidatePath("/contact");
+return{
+  email:"",
+  errors:{
+    text: undefined
+  },
+}
+
+
+  
 };

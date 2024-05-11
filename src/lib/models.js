@@ -35,6 +35,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
     desc: {
       type: String,
       required: true,
@@ -42,10 +46,7 @@ const postSchema = new mongoose.Schema(
     imgUrl:{
       type: String,
     },
-    userId: {
-      type: String,
-      required: true,
-    },
+  
     slug: {
       type: String,
       required: true,
@@ -54,7 +55,16 @@ const postSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+const contactSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+    }
+  },
+  { timestamps: true }
+);
 
 export const User = mongoose.models?.User || mongoose.model("User", userSchema);
 export const Post = mongoose.models?.Post || mongoose.model("Post", postSchema);
+export const Contact = mongoose.models?.Contact || mongoose.model("Contact", contactSchema);
 

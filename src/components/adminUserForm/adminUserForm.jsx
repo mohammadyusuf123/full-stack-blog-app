@@ -2,7 +2,19 @@
 
 import { addUser } from "@/lib/actions";
 import styles from "./adminUserForm.module.css";
-import { useFormState } from "react-dom";
+import { useFormState ,useFormStatus} from "react-dom";
+
+function AddingUser() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending} className={styles.btn}>
+      {pending ? "Adding..." : "Add"}
+    
+    </button>
+  );
+}
+
+
 const AdminUserForm = () => {
   const [state, formAction] = useFormState(addUser, undefined);
     return (
@@ -17,7 +29,7 @@ const AdminUserForm = () => {
           <option value="false">No</option>
           <option value="true">Yes</option>
         </select>
-        <button>Add</button>
+        <AddingUser/>
         {state?.error}
       </form>
     );
